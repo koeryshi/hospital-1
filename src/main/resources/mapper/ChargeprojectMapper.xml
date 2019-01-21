@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ujiuye.shoufei.mapper.ChargeprojectMapper" >
+  <resultMap id="BaseResultMap" type="com.ujiuye.shoufei.bean.Chargeproject" >
+    <id column="cmId" property="cmid" jdbcType="INTEGER" />
+    <result column="cmName" property="cmname" jdbcType="VARCHAR" />
+    <result column="cmMoney" property="cmmoney" jdbcType="DOUBLE" />
+    <result column="cmDate" property="cmdate" jdbcType="TIMESTAMP" />
+    <result column="cmDel" property="cmdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cmId, cmName, cmMoney, cmDate, cmDel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ujiuye.shoufei.bean.ChargeprojectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from chargeproject
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from chargeproject
+    where cmId = #{cmid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from chargeproject
+    where cmId = #{cmid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ujiuye.shoufei.bean.ChargeprojectExample" >
+    delete from chargeproject
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ujiuye.shoufei.bean.Chargeproject" >
+    insert into chargeproject (cmId, cmName, cmMoney, 
+      cmDate, cmDel)
+    values (#{cmid,jdbcType=INTEGER}, #{cmname,jdbcType=VARCHAR}, #{cmmoney,jdbcType=DOUBLE}, 
+      #{cmdate,jdbcType=TIMESTAMP}, #{cmdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ujiuye.shoufei.bean.Chargeproject" >
+    insert into chargeproject
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cmid != null" >
+        cmId,
+      </if>
+      <if test="cmname != null" >
+        cmName,
+      </if>
+      <if test="cmmoney != null" >
+        cmMoney,
+      </if>
+      <if test="cmdate != null" >
+        cmDate,
+      </if>
+      <if test="cmdel != null" >
+        cmDel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cmid != null" >
+        #{cmid,jdbcType=INTEGER},
+      </if>
+      <if test="cmname != null" >
+        #{cmname,jdbcType=VARCHAR},
+      </if>
+      <if test="cmmoney != null" >
+        #{cmmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="cmdate != null" >
+        #{cmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cmdel != null" >
+        #{cmdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ujiuye.shoufei.bean.ChargeprojectExample" resultType="java.lang.Integer" >
+    select count(*) from chargeproject
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update chargeproject
+    <set >
+      <if test="record.cmid != null" >
+        cmId = #{record.cmid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cmname != null" >
+        cmName = #{record.cmname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmmoney != null" >
+        cmMoney = #{record.cmmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cmdate != null" >
+        cmDate = #{record.cmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cmdel != null" >
+        cmDel = #{record.cmdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update chargeproject
+    set cmId = #{record.cmid,jdbcType=INTEGER},
+      cmName = #{record.cmname,jdbcType=VARCHAR},
+      cmMoney = #{record.cmmoney,jdbcType=DOUBLE},
+      cmDate = #{record.cmdate,jdbcType=TIMESTAMP},
+      cmDel = #{record.cmdel,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ujiuye.shoufei.bean.Chargeproject" >
+    update chargeproject
+    <set >
+      <if test="cmname != null" >
+        cmName = #{cmname,jdbcType=VARCHAR},
+      </if>
+      <if test="cmmoney != null" >
+        cmMoney = #{cmmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="cmdate != null" >
+        cmDate = #{cmdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cmdel != null" >
+        cmDel = #{cmdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cmId = #{cmid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ujiuye.shoufei.bean.Chargeproject" >
+    update chargeproject
+    set cmName = #{cmname,jdbcType=VARCHAR},
+      cmMoney = #{cmmoney,jdbcType=DOUBLE},
+      cmDate = #{cmdate,jdbcType=TIMESTAMP},
+      cmDel = #{cmdel,jdbcType=INTEGER}
+    where cmId = #{cmid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ujiuye.guahao.mapper.DoctorMapper" >
+  <resultMap id="BaseResultMap" type="com.ujiuye.guahao.bean.Doctor" >
+    <id column="dId" property="did" jdbcType="INTEGER" />
+    <result column="dName" property="dname" jdbcType="VARCHAR" />
+    <result column="dIdcard" property="didcard" jdbcType="VARCHAR" />
+    <result column="dPhone" property="dphone" jdbcType="VARCHAR" />
+    <result column="dTell" property="dtell" jdbcType="VARCHAR" />
+    <result column="dSex" property="dsex" jdbcType="INTEGER" />
+    <result column="dAge" property="dage" jdbcType="INTEGER" />
+    <result column="dBirth" property="dbirth" jdbcType="DATE" />
+    <result column="dEmail" property="demail" jdbcType="VARCHAR" />
+    <result column="dInnerDate" property="dinnerdate" jdbcType="DATE" />
+    <result column="dRemark" property="dremark" jdbcType="VARCHAR" />
+    <result column="dDel" property="ddel" jdbcType="INTEGER" />
+    <result column="d_depart_id" property="dDepartId" jdbcType="INTEGER" />
+    <result column="d_edu_id" property="dEduId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dId, dName, dIdcard, dPhone, dTell, dSex, dAge, dBirth, dEmail, dInnerDate, dRemark, 
+    dDel, d_depart_id, d_edu_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ujiuye.guahao.bean.DoctorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from doctor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from doctor
+    where dId = #{did,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from doctor
+    where dId = #{did,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ujiuye.guahao.bean.DoctorExample" >
+    delete from doctor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ujiuye.guahao.bean.Doctor" >
+    insert into doctor (dId, dName, dIdcard, 
+      dPhone, dTell, dSex, 
+      dAge, dBirth, dEmail, 
+      dInnerDate, dRemark, dDel, 
+      d_depart_id, d_edu_id)
+    values (#{did,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{didcard,jdbcType=VARCHAR}, 
+      #{dphone,jdbcType=VARCHAR}, #{dtell,jdbcType=VARCHAR}, #{dsex,jdbcType=INTEGER}, 
+      #{dage,jdbcType=INTEGER}, #{dbirth,jdbcType=DATE}, #{demail,jdbcType=VARCHAR}, 
+      #{dinnerdate,jdbcType=DATE}, #{dremark,jdbcType=VARCHAR}, #{ddel,jdbcType=INTEGER}, 
+      #{dDepartId,jdbcType=INTEGER}, #{dEduId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ujiuye.guahao.bean.Doctor" >
+    insert into doctor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="did != null" >
+        dId,
+      </if>
+      <if test="dname != null" >
+        dName,
+      </if>
+      <if test="didcard != null" >
+        dIdcard,
+      </if>
+      <if test="dphone != null" >
+        dPhone,
+      </if>
+      <if test="dtell != null" >
+        dTell,
+      </if>
+      <if test="dsex != null" >
+        dSex,
+      </if>
+      <if test="dage != null" >
+        dAge,
+      </if>
+      <if test="dbirth != null" >
+        dBirth,
+      </if>
+      <if test="demail != null" >
+        dEmail,
+      </if>
+      <if test="dinnerdate != null" >
+        dInnerDate,
+      </if>
+      <if test="dremark != null" >
+        dRemark,
+      </if>
+      <if test="ddel != null" >
+        dDel,
+      </if>
+      <if test="dDepartId != null" >
+        d_depart_id,
+      </if>
+      <if test="dEduId != null" >
+        d_edu_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="did != null" >
+        #{did,jdbcType=INTEGER},
+      </if>
+      <if test="dname != null" >
+        #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="didcard != null" >
+        #{didcard,jdbcType=VARCHAR},
+      </if>
+      <if test="dphone != null" >
+        #{dphone,jdbcType=VARCHAR},
+      </if>
+      <if test="dtell != null" >
+        #{dtell,jdbcType=VARCHAR},
+      </if>
+      <if test="dsex != null" >
+        #{dsex,jdbcType=INTEGER},
+      </if>
+      <if test="dage != null" >
+        #{dage,jdbcType=INTEGER},
+      </if>
+      <if test="dbirth != null" >
+        #{dbirth,jdbcType=DATE},
+      </if>
+      <if test="demail != null" >
+        #{demail,jdbcType=VARCHAR},
+      </if>
+      <if test="dinnerdate != null" >
+        #{dinnerdate,jdbcType=DATE},
+      </if>
+      <if test="dremark != null" >
+        #{dremark,jdbcType=VARCHAR},
+      </if>
+      <if test="ddel != null" >
+        #{ddel,jdbcType=INTEGER},
+      </if>
+      <if test="dDepartId != null" >
+        #{dDepartId,jdbcType=INTEGER},
+      </if>
+      <if test="dEduId != null" >
+        #{dEduId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ujiuye.guahao.bean.DoctorExample" resultType="java.lang.Integer" >
+    select count(*) from doctor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update doctor
+    <set >
+      <if test="record.did != null" >
+        dId = #{record.did,jdbcType=INTEGER},
+      </if>
+      <if test="record.dname != null" >
+        dName = #{record.dname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.didcard != null" >
+        dIdcard = #{record.didcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dphone != null" >
+        dPhone = #{record.dphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtell != null" >
+        dTell = #{record.dtell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dsex != null" >
+        dSex = #{record.dsex,jdbcType=INTEGER},
+      </if>
+      <if test="record.dage != null" >
+        dAge = #{record.dage,jdbcType=INTEGER},
+      </if>
+      <if test="record.dbirth != null" >
+        dBirth = #{record.dbirth,jdbcType=DATE},
+      </if>
+      <if test="record.demail != null" >
+        dEmail = #{record.demail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dinnerdate != null" >
+        dInnerDate = #{record.dinnerdate,jdbcType=DATE},
+      </if>
+      <if test="record.dremark != null" >
+        dRemark = #{record.dremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ddel != null" >
+        dDel = #{record.ddel,jdbcType=INTEGER},
+      </if>
+      <if test="record.dDepartId != null" >
+        d_depart_id = #{record.dDepartId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dEduId != null" >
+        d_edu_id = #{record.dEduId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update doctor
+    set dId = #{record.did,jdbcType=INTEGER},
+      dName = #{record.dname,jdbcType=VARCHAR},
+      dIdcard = #{record.didcard,jdbcType=VARCHAR},
+      dPhone = #{record.dphone,jdbcType=VARCHAR},
+      dTell = #{record.dtell,jdbcType=VARCHAR},
+      dSex = #{record.dsex,jdbcType=INTEGER},
+      dAge = #{record.dage,jdbcType=INTEGER},
+      dBirth = #{record.dbirth,jdbcType=DATE},
+      dEmail = #{record.demail,jdbcType=VARCHAR},
+      dInnerDate = #{record.dinnerdate,jdbcType=DATE},
+      dRemark = #{record.dremark,jdbcType=VARCHAR},
+      dDel = #{record.ddel,jdbcType=INTEGER},
+      d_depart_id = #{record.dDepartId,jdbcType=INTEGER},
+      d_edu_id = #{record.dEduId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ujiuye.guahao.bean.Doctor" >
+    update doctor
+    <set >
+      <if test="dname != null" >
+        dName = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="didcard != null" >
+        dIdcard = #{didcard,jdbcType=VARCHAR},
+      </if>
+      <if test="dphone != null" >
+        dPhone = #{dphone,jdbcType=VARCHAR},
+      </if>
+      <if test="dtell != null" >
+        dTell = #{dtell,jdbcType=VARCHAR},
+      </if>
+      <if test="dsex != null" >
+        dSex = #{dsex,jdbcType=INTEGER},
+      </if>
+      <if test="dage != null" >
+        dAge = #{dage,jdbcType=INTEGER},
+      </if>
+      <if test="dbirth != null" >
+        dBirth = #{dbirth,jdbcType=DATE},
+      </if>
+      <if test="demail != null" >
+        dEmail = #{demail,jdbcType=VARCHAR},
+      </if>
+      <if test="dinnerdate != null" >
+        dInnerDate = #{dinnerdate,jdbcType=DATE},
+      </if>
+      <if test="dremark != null" >
+        dRemark = #{dremark,jdbcType=VARCHAR},
+      </if>
+      <if test="ddel != null" >
+        dDel = #{ddel,jdbcType=INTEGER},
+      </if>
+      <if test="dDepartId != null" >
+        d_depart_id = #{dDepartId,jdbcType=INTEGER},
+      </if>
+      <if test="dEduId != null" >
+        d_edu_id = #{dEduId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dId = #{did,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ujiuye.guahao.bean.Doctor" >
+    update doctor
+    set dName = #{dname,jdbcType=VARCHAR},
+      dIdcard = #{didcard,jdbcType=VARCHAR},
+      dPhone = #{dphone,jdbcType=VARCHAR},
+      dTell = #{dtell,jdbcType=VARCHAR},
+      dSex = #{dsex,jdbcType=INTEGER},
+      dAge = #{dage,jdbcType=INTEGER},
+      dBirth = #{dbirth,jdbcType=DATE},
+      dEmail = #{demail,jdbcType=VARCHAR},
+      dInnerDate = #{dinnerdate,jdbcType=DATE},
+      dRemark = #{dremark,jdbcType=VARCHAR},
+      dDel = #{ddel,jdbcType=INTEGER},
+      d_depart_id = #{dDepartId,jdbcType=INTEGER},
+      d_edu_id = #{dEduId,jdbcType=INTEGER}
+    where dId = #{did,jdbcType=INTEGER}
+  </update>
+</mapper>
