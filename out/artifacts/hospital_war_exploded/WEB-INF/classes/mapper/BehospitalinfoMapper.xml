@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ujiuye.zhuyuan.mapper.BehospitalinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ujiuye.zhuyuan.bean.Behospitalinfo" >
+    <id column="bhId" property="bhid" jdbcType="INTEGER" />
+    <result column="beHpId" property="behpid" jdbcType="VARCHAR" />
+    <result column="beHpName" property="behpname" jdbcType="VARCHAR" />
+    <result column="beHpBed" property="behpbed" jdbcType="VARCHAR" />
+    <result column="beHpMoney" property="behpmoney" jdbcType="DOUBLE" />
+    <result column="beHp_doc_id" property="behpDocId" jdbcType="INTEGER" />
+    <result column="beHpDate" property="behpdate" jdbcType="DATE" />
+    <result column="heHp_depart_id" property="hehpDepartId" jdbcType="INTEGER" />
+    <result column="beHp_state_id" property="behpStateId" jdbcType="INTEGER" />
+    <result column="heHpDel" property="hehpdel" jdbcType="INTEGER" />
+    <result column="beHpIllness" property="behpillness" jdbcType="VARCHAR" />
+    <result column="heHpNurse" property="hehpnurse" jdbcType="VARCHAR" />
+    <result column="beHp_hosR_id" property="behpHosrId" jdbcType="INTEGER" />
+    <result column="beHp_tcid" property="behpTcid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    bhId, beHpId, beHpName, beHpBed, beHpMoney, beHp_doc_id, beHpDate, heHp_depart_id, 
+    beHp_state_id, heHpDel, beHpIllness, heHpNurse, beHp_hosR_id, beHp_tcid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ujiuye.zhuyuan.bean.BehospitalinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from behospitalinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from behospitalinfo
+    where bhId = #{bhid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from behospitalinfo
+    where bhId = #{bhid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ujiuye.zhuyuan.bean.BehospitalinfoExample" >
+    delete from behospitalinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ujiuye.zhuyuan.bean.Behospitalinfo" >
+    insert into behospitalinfo (bhId, beHpId, beHpName, 
+      beHpBed, beHpMoney, beHp_doc_id, 
+      beHpDate, heHp_depart_id, beHp_state_id, 
+      heHpDel, beHpIllness, heHpNurse, 
+      beHp_hosR_id, beHp_tcid)
+    values (#{bhid,jdbcType=INTEGER}, #{behpid,jdbcType=VARCHAR}, #{behpname,jdbcType=VARCHAR}, 
+      #{behpbed,jdbcType=VARCHAR}, #{behpmoney,jdbcType=DOUBLE}, #{behpDocId,jdbcType=INTEGER}, 
+      #{behpdate,jdbcType=DATE}, #{hehpDepartId,jdbcType=INTEGER}, #{behpStateId,jdbcType=INTEGER}, 
+      #{hehpdel,jdbcType=INTEGER}, #{behpillness,jdbcType=VARCHAR}, #{hehpnurse,jdbcType=VARCHAR}, 
+      #{behpHosrId,jdbcType=INTEGER}, #{behpTcid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ujiuye.zhuyuan.bean.Behospitalinfo" >
+    insert into behospitalinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bhid != null" >
+        bhId,
+      </if>
+      <if test="behpid != null" >
+        beHpId,
+      </if>
+      <if test="behpname != null" >
+        beHpName,
+      </if>
+      <if test="behpbed != null" >
+        beHpBed,
+      </if>
+      <if test="behpmoney != null" >
+        beHpMoney,
+      </if>
+      <if test="behpDocId != null" >
+        beHp_doc_id,
+      </if>
+      <if test="behpdate != null" >
+        beHpDate,
+      </if>
+      <if test="hehpDepartId != null" >
+        heHp_depart_id,
+      </if>
+      <if test="behpStateId != null" >
+        beHp_state_id,
+      </if>
+      <if test="hehpdel != null" >
+        heHpDel,
+      </if>
+      <if test="behpillness != null" >
+        beHpIllness,
+      </if>
+      <if test="hehpnurse != null" >
+        heHpNurse,
+      </if>
+      <if test="behpHosrId != null" >
+        beHp_hosR_id,
+      </if>
+      <if test="behpTcid != null" >
+        beHp_tcid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bhid != null" >
+        #{bhid,jdbcType=INTEGER},
+      </if>
+      <if test="behpid != null" >
+        #{behpid,jdbcType=VARCHAR},
+      </if>
+      <if test="behpname != null" >
+        #{behpname,jdbcType=VARCHAR},
+      </if>
+      <if test="behpbed != null" >
+        #{behpbed,jdbcType=VARCHAR},
+      </if>
+      <if test="behpmoney != null" >
+        #{behpmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="behpDocId != null" >
+        #{behpDocId,jdbcType=INTEGER},
+      </if>
+      <if test="behpdate != null" >
+        #{behpdate,jdbcType=DATE},
+      </if>
+      <if test="hehpDepartId != null" >
+        #{hehpDepartId,jdbcType=INTEGER},
+      </if>
+      <if test="behpStateId != null" >
+        #{behpStateId,jdbcType=INTEGER},
+      </if>
+      <if test="hehpdel != null" >
+        #{hehpdel,jdbcType=INTEGER},
+      </if>
+      <if test="behpillness != null" >
+        #{behpillness,jdbcType=VARCHAR},
+      </if>
+      <if test="hehpnurse != null" >
+        #{hehpnurse,jdbcType=VARCHAR},
+      </if>
+      <if test="behpHosrId != null" >
+        #{behpHosrId,jdbcType=INTEGER},
+      </if>
+      <if test="behpTcid != null" >
+        #{behpTcid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ujiuye.zhuyuan.bean.BehospitalinfoExample" resultType="java.lang.Integer" >
+    select count(*) from behospitalinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update behospitalinfo
+    <set >
+      <if test="record.bhid != null" >
+        bhId = #{record.bhid,jdbcType=INTEGER},
+      </if>
+      <if test="record.behpid != null" >
+        beHpId = #{record.behpid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.behpname != null" >
+        beHpName = #{record.behpname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.behpbed != null" >
+        beHpBed = #{record.behpbed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.behpmoney != null" >
+        beHpMoney = #{record.behpmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.behpDocId != null" >
+        beHp_doc_id = #{record.behpDocId,jdbcType=INTEGER},
+      </if>
+      <if test="record.behpdate != null" >
+        beHpDate = #{record.behpdate,jdbcType=DATE},
+      </if>
+      <if test="record.hehpDepartId != null" >
+        heHp_depart_id = #{record.hehpDepartId,jdbcType=INTEGER},
+      </if>
+      <if test="record.behpStateId != null" >
+        beHp_state_id = #{record.behpStateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hehpdel != null" >
+        heHpDel = #{record.hehpdel,jdbcType=INTEGER},
+      </if>
+      <if test="record.behpillness != null" >
+        beHpIllness = #{record.behpillness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hehpnurse != null" >
+        heHpNurse = #{record.hehpnurse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.behpHosrId != null" >
+        beHp_hosR_id = #{record.behpHosrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.behpTcid != null" >
+        beHp_tcid = #{record.behpTcid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update behospitalinfo
+    set bhId = #{record.bhid,jdbcType=INTEGER},
+      beHpId = #{record.behpid,jdbcType=VARCHAR},
+      beHpName = #{record.behpname,jdbcType=VARCHAR},
+      beHpBed = #{record.behpbed,jdbcType=VARCHAR},
+      beHpMoney = #{record.behpmoney,jdbcType=DOUBLE},
+      beHp_doc_id = #{record.behpDocId,jdbcType=INTEGER},
+      beHpDate = #{record.behpdate,jdbcType=DATE},
+      heHp_depart_id = #{record.hehpDepartId,jdbcType=INTEGER},
+      beHp_state_id = #{record.behpStateId,jdbcType=INTEGER},
+      heHpDel = #{record.hehpdel,jdbcType=INTEGER},
+      beHpIllness = #{record.behpillness,jdbcType=VARCHAR},
+      heHpNurse = #{record.hehpnurse,jdbcType=VARCHAR},
+      beHp_hosR_id = #{record.behpHosrId,jdbcType=INTEGER},
+      beHp_tcid = #{record.behpTcid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ujiuye.zhuyuan.bean.Behospitalinfo" >
+    update behospitalinfo
+    <set >
+      <if test="behpid != null" >
+        beHpId = #{behpid,jdbcType=VARCHAR},
+      </if>
+      <if test="behpname != null" >
+        beHpName = #{behpname,jdbcType=VARCHAR},
+      </if>
+      <if test="behpbed != null" >
+        beHpBed = #{behpbed,jdbcType=VARCHAR},
+      </if>
+      <if test="behpmoney != null" >
+        beHpMoney = #{behpmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="behpDocId != null" >
+        beHp_doc_id = #{behpDocId,jdbcType=INTEGER},
+      </if>
+      <if test="behpdate != null" >
+        beHpDate = #{behpdate,jdbcType=DATE},
+      </if>
+      <if test="hehpDepartId != null" >
+        heHp_depart_id = #{hehpDepartId,jdbcType=INTEGER},
+      </if>
+      <if test="behpStateId != null" >
+        beHp_state_id = #{behpStateId,jdbcType=INTEGER},
+      </if>
+      <if test="hehpdel != null" >
+        heHpDel = #{hehpdel,jdbcType=INTEGER},
+      </if>
+      <if test="behpillness != null" >
+        beHpIllness = #{behpillness,jdbcType=VARCHAR},
+      </if>
+      <if test="hehpnurse != null" >
+        heHpNurse = #{hehpnurse,jdbcType=VARCHAR},
+      </if>
+      <if test="behpHosrId != null" >
+        beHp_hosR_id = #{behpHosrId,jdbcType=INTEGER},
+      </if>
+      <if test="behpTcid != null" >
+        beHp_tcid = #{behpTcid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bhId = #{bhid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ujiuye.zhuyuan.bean.Behospitalinfo" >
+    update behospitalinfo
+    set beHpId = #{behpid,jdbcType=VARCHAR},
+      beHpName = #{behpname,jdbcType=VARCHAR},
+      beHpBed = #{behpbed,jdbcType=VARCHAR},
+      beHpMoney = #{behpmoney,jdbcType=DOUBLE},
+      beHp_doc_id = #{behpDocId,jdbcType=INTEGER},
+      beHpDate = #{behpdate,jdbcType=DATE},
+      heHp_depart_id = #{hehpDepartId,jdbcType=INTEGER},
+      beHp_state_id = #{behpStateId,jdbcType=INTEGER},
+      heHpDel = #{hehpdel,jdbcType=INTEGER},
+      beHpIllness = #{behpillness,jdbcType=VARCHAR},
+      heHpNurse = #{hehpnurse,jdbcType=VARCHAR},
+      beHp_hosR_id = #{behpHosrId,jdbcType=INTEGER},
+      beHp_tcid = #{behpTcid,jdbcType=INTEGER}
+    where bhId = #{bhid,jdbcType=INTEGER}
+  </update>
+</mapper>

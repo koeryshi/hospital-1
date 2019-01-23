@@ -27,4 +27,6 @@ public interface ChargeprojectMapper {
     int updateByPrimaryKeySelective(Chargeproject record);
 
     int updateByPrimaryKey(Chargeproject record);
+
+    List<Chargeproject> selectByNameforVague(String cmName);
 }
