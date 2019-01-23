@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ujiuye.shoufei.mapper.CheckchargeMapper" >
+  <resultMap id="BaseResultMap" type="com.ujiuye.shoufei.bean.Checkcharge" >
+    <id column="ccId" property="ccid" jdbcType="INTEGER" />
+    <result column="beHpId" property="behpid" jdbcType="VARCHAR" />
+    <result column="ccMoney" property="ccmoney" jdbcType="DOUBLE" />
+    <result column="ccLastMoney" property="cclastmoney" jdbcType="DOUBLE" />
+    <result column="ccDel" property="ccdel" jdbcType="INTEGER" />
+    <result column="cc_cp_id" property="ccCpId" jdbcType="INTEGER" />
+    <result column="cc_tc_id" property="ccTcId" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ccId, beHpId, ccMoney, ccLastMoney, ccDel, cc_cp_id, cc_tc_id, createTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ujiuye.shoufei.bean.CheckchargeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from checkcharge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from checkcharge
+    where ccId = #{ccid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from checkcharge
+    where ccId = #{ccid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ujiuye.shoufei.bean.CheckchargeExample" >
+    delete from checkcharge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ujiuye.shoufei.bean.Checkcharge" >
+    insert into checkcharge (ccId, beHpId, ccMoney, 
+      ccLastMoney, ccDel, cc_cp_id, 
+      cc_tc_id, createTime)
+    values (#{ccid,jdbcType=INTEGER}, #{behpid,jdbcType=VARCHAR}, #{ccmoney,jdbcType=DOUBLE}, 
+      #{cclastmoney,jdbcType=DOUBLE}, #{ccdel,jdbcType=INTEGER}, #{ccCpId,jdbcType=INTEGER}, 
+      #{ccTcId,jdbcType=INTEGER}, #{createtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ujiuye.shoufei.bean.Checkcharge" >
+    insert into checkcharge
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ccid != null" >
+        ccId,
+      </if>
+      <if test="behpid != null" >
+        beHpId,
+      </if>
+      <if test="ccmoney != null" >
+        ccMoney,
+      </if>
+      <if test="cclastmoney != null" >
+        ccLastMoney,
+      </if>
+      <if test="ccdel != null" >
+        ccDel,
+      </if>
+      <if test="ccCpId != null" >
+        cc_cp_id,
+      </if>
+      <if test="ccTcId != null" >
+        cc_tc_id,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ccid != null" >
+        #{ccid,jdbcType=INTEGER},
+      </if>
+      <if test="behpid != null" >
+        #{behpid,jdbcType=VARCHAR},
+      </if>
+      <if test="ccmoney != null" >
+        #{ccmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="cclastmoney != null" >
+        #{cclastmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="ccdel != null" >
+        #{ccdel,jdbcType=INTEGER},
+      </if>
+      <if test="ccCpId != null" >
+        #{ccCpId,jdbcType=INTEGER},
+      </if>
+      <if test="ccTcId != null" >
+        #{ccTcId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ujiuye.shoufei.bean.CheckchargeExample" resultType="java.lang.Integer" >
+    select count(*) from checkcharge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update checkcharge
+    <set >
+      <if test="record.ccid != null" >
+        ccId = #{record.ccid,jdbcType=INTEGER},
+      </if>
+      <if test="record.behpid != null" >
+        beHpId = #{record.behpid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ccmoney != null" >
+        ccMoney = #{record.ccmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cclastmoney != null" >
+        ccLastMoney = #{record.cclastmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ccdel != null" >
+        ccDel = #{record.ccdel,jdbcType=INTEGER},
+      </if>
+      <if test="record.ccCpId != null" >
+        cc_cp_id = #{record.ccCpId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ccTcId != null" >
+        cc_tc_id = #{record.ccTcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update checkcharge
+    set ccId = #{record.ccid,jdbcType=INTEGER},
+      beHpId = #{record.behpid,jdbcType=VARCHAR},
+      ccMoney = #{record.ccmoney,jdbcType=DOUBLE},
+      ccLastMoney = #{record.cclastmoney,jdbcType=DOUBLE},
+      ccDel = #{record.ccdel,jdbcType=INTEGER},
+      cc_cp_id = #{record.ccCpId,jdbcType=INTEGER},
+      cc_tc_id = #{record.ccTcId,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ujiuye.shoufei.bean.Checkcharge" >
+    update checkcharge
+    <set >
+      <if test="behpid != null" >
+        beHpId = #{behpid,jdbcType=VARCHAR},
+      </if>
+      <if test="ccmoney != null" >
+        ccMoney = #{ccmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="cclastmoney != null" >
+        ccLastMoney = #{cclastmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="ccdel != null" >
+        ccDel = #{ccdel,jdbcType=INTEGER},
+      </if>
+      <if test="ccCpId != null" >
+        cc_cp_id = #{ccCpId,jdbcType=INTEGER},
+      </if>
+      <if test="ccTcId != null" >
+        cc_tc_id = #{ccTcId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=DATE},
+      </if>
+    </set>
+    where ccId = #{ccid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ujiuye.shoufei.bean.Checkcharge" >
+    update checkcharge
+    set beHpId = #{behpid,jdbcType=VARCHAR},
+      ccMoney = #{ccmoney,jdbcType=DOUBLE},
+      ccLastMoney = #{cclastmoney,jdbcType=DOUBLE},
+      ccDel = #{ccdel,jdbcType=INTEGER},
+      cc_cp_id = #{ccCpId,jdbcType=INTEGER},
+      cc_tc_id = #{ccTcId,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=DATE}
+    where ccId = #{ccid,jdbcType=INTEGER}
+  </update>
+</mapper>

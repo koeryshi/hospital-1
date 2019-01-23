@@ -52,4 +52,15 @@ public class Chargeproject {
     public void setCmdel(Integer cmdel) {
         this.cmdel = cmdel;
     }
+
+    @Override
+    public String toString() {
+        return "Chargeproject{" +
+                "cmid=" + cmid +
+                ", cmname='" + cmname + '\'' +
+                ", cmmoney=" + cmmoney +
+                ", cmdate=" + cmdate +
+                ", cmdel=" + cmdel +
+                '}';
+    }
 }
