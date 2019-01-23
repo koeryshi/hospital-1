@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ujiuye.fayao.mapper.SendmedicineMapper" >
+  <resultMap id="BaseResultMap" type="com.ujiuye.fayao.bean.Sendmedicine" >
+    <id column="sendMedId" property="sendmedid" jdbcType="INTEGER" />
+    <result column="heHpId" property="hehpid" jdbcType="VARCHAR" />
+    <result column="smDrugNum" property="smdrugnum" jdbcType="INTEGER" />
+    <result column="smSendNum" property="smsendnum" jdbcType="INTEGER" />
+    <result column="smNoSendNum" property="smnosendnum" jdbcType="INTEGER" />
+    <result column="smSendDate" property="smsenddate" jdbcType="DATE" />
+    <result column="smDel" property="smdel" jdbcType="INTEGER" />
+    <result column="sm_drug_id" property="smDrugId" jdbcType="INTEGER" />
+    <result column="sm_tc_id" property="smTcId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sendMedId, heHpId, smDrugNum, smSendNum, smNoSendNum, smSendDate, smDel, sm_drug_id, 
+    sm_tc_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ujiuye.fayao.bean.SendmedicineExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sendmedicine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sendmedicine
+    where sendMedId = #{sendmedid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sendmedicine
+    where sendMedId = #{sendmedid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ujiuye.fayao.bean.SendmedicineExample" >
+    delete from sendmedicine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ujiuye.fayao.bean.Sendmedicine" >
+    insert into sendmedicine (sendMedId, heHpId, smDrugNum, 
+      smSendNum, smNoSendNum, smSendDate, 
+      smDel, sm_drug_id, sm_tc_id
+      )
+    values (#{sendmedid,jdbcType=INTEGER}, #{hehpid,jdbcType=VARCHAR}, #{smdrugnum,jdbcType=INTEGER}, 
+      #{smsendnum,jdbcType=INTEGER}, #{smnosendnum,jdbcType=INTEGER}, #{smsenddate,jdbcType=DATE}, 
+      #{smdel,jdbcType=INTEGER}, #{smDrugId,jdbcType=INTEGER}, #{smTcId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ujiuye.fayao.bean.Sendmedicine" >
+    insert into sendmedicine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sendmedid != null" >
+        sendMedId,
+      </if>
+      <if test="hehpid != null" >
+        heHpId,
+      </if>
+      <if test="smdrugnum != null" >
+        smDrugNum,
+      </if>
+      <if test="smsendnum != null" >
+        smSendNum,
+      </if>
+      <if test="smnosendnum != null" >
+        smNoSendNum,
+      </if>
+      <if test="smsenddate != null" >
+        smSendDate,
+      </if>
+      <if test="smdel != null" >
+        smDel,
+      </if>
+      <if test="smDrugId != null" >
+        sm_drug_id,
+      </if>
+      <if test="smTcId != null" >
+        sm_tc_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sendmedid != null" >
+        #{sendmedid,jdbcType=INTEGER},
+      </if>
+      <if test="hehpid != null" >
+        #{hehpid,jdbcType=VARCHAR},
+      </if>
+      <if test="smdrugnum != null" >
+        #{smdrugnum,jdbcType=INTEGER},
+      </if>
+      <if test="smsendnum != null" >
+        #{smsendnum,jdbcType=INTEGER},
+      </if>
+      <if test="smnosendnum != null" >
+        #{smnosendnum,jdbcType=INTEGER},
+      </if>
+      <if test="smsenddate != null" >
+        #{smsenddate,jdbcType=DATE},
+      </if>
+      <if test="smdel != null" >
+        #{smdel,jdbcType=INTEGER},
+      </if>
+      <if test="smDrugId != null" >
+        #{smDrugId,jdbcType=INTEGER},
+      </if>
+      <if test="smTcId != null" >
+        #{smTcId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ujiuye.fayao.bean.SendmedicineExample" resultType="java.lang.Integer" >
+    select count(*) from sendmedicine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sendmedicine
+    <set >
+      <if test="record.sendmedid != null" >
+        sendMedId = #{record.sendmedid,jdbcType=INTEGER},
+      </if>
+      <if test="record.hehpid != null" >
+        heHpId = #{record.hehpid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smdrugnum != null" >
+        smDrugNum = #{record.smdrugnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.smsendnum != null" >
+        smSendNum = #{record.smsendnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.smnosendnum != null" >
+        smNoSendNum = #{record.smnosendnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.smsenddate != null" >
+        smSendDate = #{record.smsenddate,jdbcType=DATE},
+      </if>
+      <if test="record.smdel != null" >
+        smDel = #{record.smdel,jdbcType=INTEGER},
+      </if>
+      <if test="record.smDrugId != null" >
+        sm_drug_id = #{record.smDrugId,jdbcType=INTEGER},
+      </if>
+      <if test="record.smTcId != null" >
+        sm_tc_id = #{record.smTcId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sendmedicine
+    set sendMedId = #{record.sendmedid,jdbcType=INTEGER},
+      heHpId = #{record.hehpid,jdbcType=VARCHAR},
+      smDrugNum = #{record.smdrugnum,jdbcType=INTEGER},
+      smSendNum = #{record.smsendnum,jdbcType=INTEGER},
+      smNoSendNum = #{record.smnosendnum,jdbcType=INTEGER},
+      smSendDate = #{record.smsenddate,jdbcType=DATE},
+      smDel = #{record.smdel,jdbcType=INTEGER},
+      sm_drug_id = #{record.smDrugId,jdbcType=INTEGER},
+      sm_tc_id = #{record.smTcId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ujiuye.fayao.bean.Sendmedicine" >
+    update sendmedicine
+    <set >
+      <if test="hehpid != null" >
+        heHpId = #{hehpid,jdbcType=VARCHAR},
+      </if>
+      <if test="smdrugnum != null" >
+        smDrugNum = #{smdrugnum,jdbcType=INTEGER},
+      </if>
+      <if test="smsendnum != null" >
+        smSendNum = #{smsendnum,jdbcType=INTEGER},
+      </if>
+      <if test="smnosendnum != null" >
+        smNoSendNum = #{smnosendnum,jdbcType=INTEGER},
+      </if>
+      <if test="smsenddate != null" >
+        smSendDate = #{smsenddate,jdbcType=DATE},
+      </if>
+      <if test="smdel != null" >
+        smDel = #{smdel,jdbcType=INTEGER},
+      </if>
+      <if test="smDrugId != null" >
+        sm_drug_id = #{smDrugId,jdbcType=INTEGER},
+      </if>
+      <if test="smTcId != null" >
+        sm_tc_id = #{smTcId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sendMedId = #{sendmedid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ujiuye.fayao.bean.Sendmedicine" >
+    update sendmedicine
+    set heHpId = #{hehpid,jdbcType=VARCHAR},
+      smDrugNum = #{smdrugnum,jdbcType=INTEGER},
+      smSendNum = #{smsendnum,jdbcType=INTEGER},
+      smNoSendNum = #{smnosendnum,jdbcType=INTEGER},
+      smSendDate = #{smsenddate,jdbcType=DATE},
+      smDel = #{smdel,jdbcType=INTEGER},
+      sm_drug_id = #{smDrugId,jdbcType=INTEGER},
+      sm_tc_id = #{smTcId,jdbcType=INTEGER}
+    where sendMedId = #{sendmedid,jdbcType=INTEGER}
+  </update>
+</mapper>
