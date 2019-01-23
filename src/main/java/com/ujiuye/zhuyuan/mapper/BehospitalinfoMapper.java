@@ -27,4 +27,6 @@ public interface BehospitalinfoMapper {
     int updateByPrimaryKeySelective(Behospitalinfo record);
 
     int updateByPrimaryKey(Behospitalinfo record);
+
+    List<Behospitalinfo> selectBehospitalinfo(BehospitalinfoExample behospitalinfoExample);
 }

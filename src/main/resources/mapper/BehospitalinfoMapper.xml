@@ -17,6 +17,20 @@
     <result column="beHp_hosR_id" property="behpHosrId" jdbcType="INTEGER" />
     <result column="beHp_tcid" property="behpTcid" jdbcType="INTEGER" />
   </resultMap>
+
+  <resultMap id="newResultMap" type="com.ujiuye.zhuyuan.bean.Behospitalinfo" extends="BaseResultMap">
+    <association property="hosregister" column="beHp_hosR_id" javaType="com.ujiuye.guahao.bean.Hosregister" select="com.ujiuye.guahao.mapper.HosregisterMapper.selectByPrimaryKey"></association>
+    <association property="doctor" column="beHp_doc_id" javaType="com.ujiuye.guahao.bean.Doctor" select="com.ujiuye.guahao.mapper.DoctorMapper.selectByPrimaryKey"></association>
+    <association property="department" column="heHp_depart_id" javaType="com.ujiuye.guahao.bean.Department" select="com.ujiuye.guahao.mapper.DepartmentMapper.selectByPrimaryKey"></association>
+    <association property="state" column="beHp_state_id" javaType="com.ujiuye.zhuyuan.bean.State" select="com.ujiuye.zhuyuan.mapper.StateMapper.selectByPrimaryKey"></association>
+  </resultMap>
+
+
+<select id="selectBehospitalinfo" resultMap="newResultMap">
+  select <include refid="Base_Column_List"></include> from behospitalinfo
+</select>
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
