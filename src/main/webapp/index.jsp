@@ -55,13 +55,13 @@
 		
 		{text:'快速通道',items:[
 		
-		{id:'2',text:'挂号信息管理',href:'html/registration/index.html'},
+		{id:'2',text:'挂号信息管理',href:'html/registration/index.jsp'},
 		
-		{id:'5',text:'住院办理',href:'html/hospital/index.html'},
+		{id:'5',text:'住院办理',href:'html/hospital/index.jsp'},
 		{id:'8',text:'住院结算',href:'html/hospital/account.html'},
 		
 		{id:'7',text:'在院发药',href:'html/hospital/dispensing.html'},
-		{id:'4',text:'药品管理',href:'html/medicine/index.html'},
+		{id:'4',text:'药品管理',href:'html/medicine/index.jsp'},
 		
 		{id:'16',text:'检查收费项目登记',href:'html/hospital/charge2.html'},
 		{id:'6',text:'收费项目管理',href:'html/hospital/charge.jsp'},
@@ -70,10 +70,10 @@
 		{id:'9',text:'月营业额统计',href:''},
 		{id:'10',text:'年营业额统计',href:''},
 		**/
-		{id:'3',text:'门诊医生管理',href:'html/doctor/index.html'},
-		{id:'11',text:'用户管理',href:'html/User/index.html'},
-		{id:'12',text:'角色管理',href:'html/Role/index.html'},
-		{id:'13',text:'资源管理',href:'html/Resource/index.html'},
+		{id:'3',text:'门诊医生管理',href:'html/doctor/index.jsp'},
+		{id:'11',text:'用户管理',href:'html/User/index.jsp'},
+		{id:'12',text:'角色管理',href:'html/Role/index.jsp'},
+		{id:'13',text:'资源管理',href:'html/Resource/index.jsp'},
 		{id:'13',text:'密码管理',href:'html/User/password.html'}
 		]}
 		

@@ -3,6 +3,9 @@ package com.ujiuye.guahao.mapper;
 import com.ujiuye.guahao.bean.Doctor;
 import com.ujiuye.guahao.bean.DoctorExample;
 import java.util.List;
+
+import com.ujiuye.zhuyuan.bean.Behospitalinfo;
+import com.ujiuye.zhuyuan.bean.BehospitalinfoExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface DoctorMapper {
@@ -27,4 +30,5 @@ public interface DoctorMapper {
     int updateByPrimaryKeySelective(Doctor record);
 
     int updateByPrimaryKey(Doctor record);
+
 }

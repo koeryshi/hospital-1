@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,9 @@
 				window.location.href="add.html";
 		 });
     });
-	
+
+
+
     	function checkall(){
 			var alls=document.getElementsByName("check");
 			var ch=document.getElementById("checkall");
@@ -67,31 +70,100 @@
 				alert("请选中要操作的项");
 			}
 		}
+     $(function () {
+         $.ajax({
+             type:"post",
+             url:"${pageContext.request.contextPath}/zhuyuan/selectInfo",
+             datatype:"json",
+             success:function (returndata) {
+                 $(returndata).each(function (index,item) {
+                     var time=formatDateTime(item.behpdate);
+                     var st="<tr class='old'><td style='vertical-align:middle;'><input type='checkbox' name='check' value='1'></td>"
+                         +"<td style='vertical-align:middle;'>"+item.behpid+"</td>"
+                         +"<td style='vertical-align:middle;'>"+item.behpname+"</td>"
+                         +"<td style='vertical-align:middle;'>"+item.behpbed+"</td>"
+                         +"<td style='vertical-align:middle;'>"+item.hosregister.hosrphone+"</td>"
+                         +"<td style='vertical-align:middle;'>"+item.behpmoney+"</td>"
+                         +"<td style='vertical-align:middle;'>"+item.doctor.dname+"</td>"
+                         +"<td style='vertical-align:middle;'>"+time+"</td>"
+                         +"<td style='vertical-align:middle;'>"+item.department.departname+"</td>"
+                         +"<td style='vertical-align:middle;'>"+item.state.statename+"</td>"
+                         +"<td style='vertical-align:middle;'>"
+                         +"<a href='look.html'>详情>></a>&nbsp;&nbsp;&nbsp;"
+                         +"<a href='edit.html'>更改</a>&nbsp;&nbsp;&nbsp;"
+                     if(item.state.stateid==4 || item.state.stateid==5){
+                     }else {
+                         st+="<a href='add_many.html'>缴纳押金</a>&nbsp;&nbsp;&nbsp;"
+                     }
+                     st+= "</td> </tr>"
+                     $("#tr2").after(st);
+                 })
+             }
+         })
+     });
+     function formatDateTime(timeStamp) {
+         var date = new Date();
+         date.setTime(timeStamp);
+         var y = date.getFullYear();
+         var m = date.getMonth() + 1;
+         m = m < 10 ? ('0' + m) : m;
+         var d = date.getDate();
+         d = d < 10 ? ('0' + d) : d;
+         /*var h = date.getHours();
+         h = h < 10 ? ('0' + h) : h;
+         var minute = date.getMinutes();
+         var second = date.getSeconds();
+         minute = minute < 10 ? ('0' + minute) : minute;
+         second = second < 10 ? ('0' + second) : second;*/
+         return y + '-' + m + '-' + d;
+         /* return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;*/
+     };
+     function submit() {
+         $(".old").remove();
+        /* var param=$("#form1").serializeObject();*/
+             $.ajax({
+                 async: false,
+                 type: "post",
+                 dataType: "json",
+                 url: "${pageContext.request.contextPath}/zhuyuan/selectInfo" ,
+                 data: $('#form1').serialize(),
+                 success: function (returndata) {
+                     $(returndata).each(function (index,item) {
+
+                     })
+                 },
+                 error : function() {
+                     alert("异常！");
+                 }
+             });
+
+
+     }
     </script>
 </head>
 <body>
 
-<form action="index.html" method="post" class="definewidth m20">
+<form  class="definewidth m20" id="form1">
 <table class="table table-bordered table-hover definewidth m10">
     <tr>
         <td width="10%" class="tableleft">病例号：</td>
-        <td><input type="text" name="pname" value=""/></td>
+        <td><input type="text" name="behpid"/></td>
 		
         <td width="10%" class="tableleft">主治医生：</td>
-        <td><input type="text" name="pname" value=""/></td>
+        <td><input type="text" name="behpDocId" value=""/></td>
 		
         <td width="10%" class="tableleft">科室：</td>
-        <td><input type="text" name="pname" value=""/></td>
+        <td><input type="text" name="hehpDepartId" value=""/></td>
     </tr>
     <tr>
 		
         <td width="10%" class="tableleft">住院时间：</td>
 		
 		  <td colspan="5">
-			<input type="text" name="pname" value=""/>&nbsp;至&nbsp;<input type="text" name="pname" value=""/>
+			<input type="date" name="date1" value=""/>&nbsp;至&nbsp;<input type="date" name="date2" value=""/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="submit" class="btn btn-primary" type="button">查询</button> 
-            <button type="submit" class="btn btn-primary" type="button">清空</button> 
+            <button type="button" class="btn btn-primary" onclick="submit()">查询</button>
+            <button type="reset" class="btn btn-primary">清空</button>
 			
         </td>
     </tr>
@@ -100,7 +172,7 @@
    
 <table class="table table-bordered table-hover definewidth m10" >
    <thead>
-    <tr>
+    <tr id="tr2">
     	<th><input type="checkbox" id="checkall" onChange="checkall();"></th>
         <th>病历号</th>
         <th>姓名</th>
@@ -114,7 +186,7 @@
         <th>操作</th>
     </tr>
     </thead>
-	     <tr >
+	    <%-- <tr >
          	<td style="vertical-align:middle;"><input type="checkbox" name="check" value="1"></td>
             <td style="vertical-align:middle;">1103</td>
             <td style="vertical-align:middle;">黄飞鸿</td>
@@ -132,55 +204,8 @@
 				
 				
 			</td>
-        </tr>
-	     <tr >
-         	<td style="vertical-align:middle;"><input type="checkbox" name="check" value="1"></td>
-            <td style="vertical-align:middle;">1103</td>
-            <td style="vertical-align:middle;">黄飞鸿</td>
-            <td style="vertical-align:middle;">4343</td>
-            <td style="vertical-align:middle;">13127653423</td>
-            <td style="vertical-align:middle;">2000元</td>
-            <td style="vertical-align:middle;">程俊</td>
-            <td style="vertical-align:middle;">2015-01-05 12:33:56</td>
-            <td style="vertical-align:middle;">血液科</td>
-            <td style="vertical-align:middle;">已退院</td>
-            <td style="vertical-align:middle;">
-				<a href="look.html">详情>></a>&nbsp;&nbsp;&nbsp;
-			</td>
-        </tr>
-	     <tr >
-         	<td style="vertical-align:middle;"><input type="checkbox" name="check" value="1"></td>
-            <td style="vertical-align:middle;">1103</td>
-            <td style="vertical-align:middle;">黄飞鸿</td>
-            <td style="vertical-align:middle;">4343</td>
-            <td style="vertical-align:middle;">13127653423</td>
-            <td style="vertical-align:middle;">2000元</td>
-            <td style="vertical-align:middle;">程俊</td>
-            <td style="vertical-align:middle;">2015-01-05 12:33:56</td>
-            <td style="vertical-align:middle;">血液科</td>
-            <td style="vertical-align:middle;">已结算</td>
-            <td style="vertical-align:middle;">
-				<a href="look.html">详情>></a>&nbsp;&nbsp;&nbsp;				
-				<a href="javascript:alert('退院成功！');">退院</a>&nbsp;&nbsp;&nbsp;
-				<a href="javascript:alert('出院成功！');">出院</a>
-			</td>
-        </tr>
-	     <tr >
-         	<td style="vertical-align:middle;"><input type="checkbox" name="check" value="1"></td>
-            <td style="vertical-align:middle;">1103</td>
-            <td style="vertical-align:middle;">黄飞鸿</td>
-            <td style="vertical-align:middle;">4343</td>
-            <td style="vertical-align:middle;">13127653423</td>
-            <td style="vertical-align:middle;">2000元</td>
-            <td style="vertical-align:middle;">程俊</td>
-            <td style="vertical-align:middle;">2015-01-05 12:33:56</td>
-            <td style="vertical-align:middle;">血液科</td>
-            <td style="vertical-align:middle;">已出院</td>
-            <td style="vertical-align:middle;">
-				<a href="look.html">详情>></a>&nbsp;&nbsp;&nbsp;
+        </tr>--%>
 
-			</td>
-        </tr>
   </table>
   
   <table class="table table-bordered table-hover definewidth m10" >
