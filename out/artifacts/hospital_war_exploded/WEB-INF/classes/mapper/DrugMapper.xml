@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ujiuye.fayao.mapper.DrugMapper" >
+  <resultMap id="BaseResultMap" type="com.ujiuye.fayao.bean.Drug" >
+    <id column="drugId" property="drugid" jdbcType="INTEGER" />
+    <result column="drugCode" property="drugcode" jdbcType="VARCHAR" />
+    <result column="drugImgName" property="drugimgname" jdbcType="VARCHAR" />
+    <result column="drugInprice" property="druginprice" jdbcType="DOUBLE" />
+    <result column="drugSaleprice" property="drugsaleprice" jdbcType="DOUBLE" />
+    <result column="drugName" property="drugname" jdbcType="VARCHAR" />
+    <result column="drugType" property="drugtype" jdbcType="VARCHAR" />
+    <result column="drugSimpleDesc" property="drugsimpledesc" jdbcType="VARCHAR" />
+    <result column="drugMakeDate" property="drugmakedate" jdbcType="DATE" />
+    <result column="drugEXPDate" property="drugexpdate" jdbcType="DATE" />
+    <result column="drugQualityTime" property="drugqualitytime" jdbcType="INTEGER" />
+    <result column="drugDesc" property="drugdesc" jdbcType="VARCHAR" />
+    <result column="drugMakeFirm" property="drugmakefirm" jdbcType="VARCHAR" />
+    <result column="drugEatExplain" property="drugeatexplain" jdbcType="VARCHAR" />
+    <result column="drugNum" property="drugnum" jdbcType="INTEGER" />
+    <result column="drugLastNum" property="druglastnum" jdbcType="INTEGER" />
+    <result column="drugState" property="drugstate" jdbcType="INTEGER" />
+    <result column="drugRemark" property="drugremark" jdbcType="VARCHAR" />
+    <result column="drugDel" property="drugdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    drugId, drugCode, drugImgName, drugInprice, drugSaleprice, drugName, drugType, drugSimpleDesc, 
+    drugMakeDate, drugEXPDate, drugQualityTime, drugDesc, drugMakeFirm, drugEatExplain, 
+    drugNum, drugLastNum, drugState, drugRemark, drugDel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ujiuye.fayao.bean.DrugExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from drug
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from drug
+    where drugId = #{drugid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from drug
+    where drugId = #{drugid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ujiuye.fayao.bean.DrugExample" >
+    delete from drug
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ujiuye.fayao.bean.Drug" >
+    insert into drug (drugId, drugCode, drugImgName, 
+      drugInprice, drugSaleprice, drugName, 
+      drugType, drugSimpleDesc, drugMakeDate, 
+      drugEXPDate, drugQualityTime, drugDesc, 
+      drugMakeFirm, drugEatExplain, drugNum, 
+      drugLastNum, drugState, drugRemark, 
+      drugDel)
+    values (#{drugid,jdbcType=INTEGER}, #{drugcode,jdbcType=VARCHAR}, #{drugimgname,jdbcType=VARCHAR}, 
+      #{druginprice,jdbcType=DOUBLE}, #{drugsaleprice,jdbcType=DOUBLE}, #{drugname,jdbcType=VARCHAR}, 
+      #{drugtype,jdbcType=VARCHAR}, #{drugsimpledesc,jdbcType=VARCHAR}, #{drugmakedate,jdbcType=DATE}, 
+      #{drugexpdate,jdbcType=DATE}, #{drugqualitytime,jdbcType=INTEGER}, #{drugdesc,jdbcType=VARCHAR}, 
+      #{drugmakefirm,jdbcType=VARCHAR}, #{drugeatexplain,jdbcType=VARCHAR}, #{drugnum,jdbcType=INTEGER}, 
+      #{druglastnum,jdbcType=INTEGER}, #{drugstate,jdbcType=INTEGER}, #{drugremark,jdbcType=VARCHAR}, 
+      #{drugdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ujiuye.fayao.bean.Drug" >
+    insert into drug
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="drugid != null" >
+        drugId,
+      </if>
+      <if test="drugcode != null" >
+        drugCode,
+      </if>
+      <if test="drugimgname != null" >
+        drugImgName,
+      </if>
+      <if test="druginprice != null" >
+        drugInprice,
+      </if>
+      <if test="drugsaleprice != null" >
+        drugSaleprice,
+      </if>
+      <if test="drugname != null" >
+        drugName,
+      </if>
+      <if test="drugtype != null" >
+        drugType,
+      </if>
+      <if test="drugsimpledesc != null" >
+        drugSimpleDesc,
+      </if>
+      <if test="drugmakedate != null" >
+        drugMakeDate,
+      </if>
+      <if test="drugexpdate != null" >
+        drugEXPDate,
+      </if>
+      <if test="drugqualitytime != null" >
+        drugQualityTime,
+      </if>
+      <if test="drugdesc != null" >
+        drugDesc,
+      </if>
+      <if test="drugmakefirm != null" >
+        drugMakeFirm,
+      </if>
+      <if test="drugeatexplain != null" >
+        drugEatExplain,
+      </if>
+      <if test="drugnum != null" >
+        drugNum,
+      </if>
+      <if test="druglastnum != null" >
+        drugLastNum,
+      </if>
+      <if test="drugstate != null" >
+        drugState,
+      </if>
+      <if test="drugremark != null" >
+        drugRemark,
+      </if>
+      <if test="drugdel != null" >
+        drugDel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="drugid != null" >
+        #{drugid,jdbcType=INTEGER},
+      </if>
+      <if test="drugcode != null" >
+        #{drugcode,jdbcType=VARCHAR},
+      </if>
+      <if test="drugimgname != null" >
+        #{drugimgname,jdbcType=VARCHAR},
+      </if>
+      <if test="druginprice != null" >
+        #{druginprice,jdbcType=DOUBLE},
+      </if>
+      <if test="drugsaleprice != null" >
+        #{drugsaleprice,jdbcType=DOUBLE},
+      </if>
+      <if test="drugname != null" >
+        #{drugname,jdbcType=VARCHAR},
+      </if>
+      <if test="drugtype != null" >
+        #{drugtype,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsimpledesc != null" >
+        #{drugsimpledesc,jdbcType=VARCHAR},
+      </if>
+      <if test="drugmakedate != null" >
+        #{drugmakedate,jdbcType=DATE},
+      </if>
+      <if test="drugexpdate != null" >
+        #{drugexpdate,jdbcType=DATE},
+      </if>
+      <if test="drugqualitytime != null" >
+        #{drugqualitytime,jdbcType=INTEGER},
+      </if>
+      <if test="drugdesc != null" >
+        #{drugdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="drugmakefirm != null" >
+        #{drugmakefirm,jdbcType=VARCHAR},
+      </if>
+      <if test="drugeatexplain != null" >
+        #{drugeatexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="drugnum != null" >
+        #{drugnum,jdbcType=INTEGER},
+      </if>
+      <if test="druglastnum != null" >
+        #{druglastnum,jdbcType=INTEGER},
+      </if>
+      <if test="drugstate != null" >
+        #{drugstate,jdbcType=INTEGER},
+      </if>
+      <if test="drugremark != null" >
+        #{drugremark,jdbcType=VARCHAR},
+      </if>
+      <if test="drugdel != null" >
+        #{drugdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ujiuye.fayao.bean.DrugExample" resultType="java.lang.Integer" >
+    select count(*) from drug
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update drug
+    <set >
+      <if test="record.drugid != null" >
+        drugId = #{record.drugid,jdbcType=INTEGER},
+      </if>
+      <if test="record.drugcode != null" >
+        drugCode = #{record.drugcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugimgname != null" >
+        drugImgName = #{record.drugimgname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.druginprice != null" >
+        drugInprice = #{record.druginprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.drugsaleprice != null" >
+        drugSaleprice = #{record.drugsaleprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.drugname != null" >
+        drugName = #{record.drugname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugtype != null" >
+        drugType = #{record.drugtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugsimpledesc != null" >
+        drugSimpleDesc = #{record.drugsimpledesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugmakedate != null" >
+        drugMakeDate = #{record.drugmakedate,jdbcType=DATE},
+      </if>
+      <if test="record.drugexpdate != null" >
+        drugEXPDate = #{record.drugexpdate,jdbcType=DATE},
+      </if>
+      <if test="record.drugqualitytime != null" >
+        drugQualityTime = #{record.drugqualitytime,jdbcType=INTEGER},
+      </if>
+      <if test="record.drugdesc != null" >
+        drugDesc = #{record.drugdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugmakefirm != null" >
+        drugMakeFirm = #{record.drugmakefirm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugeatexplain != null" >
+        drugEatExplain = #{record.drugeatexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugnum != null" >
+        drugNum = #{record.drugnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.druglastnum != null" >
+        drugLastNum = #{record.druglastnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.drugstate != null" >
+        drugState = #{record.drugstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.drugremark != null" >
+        drugRemark = #{record.drugremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugdel != null" >
+        drugDel = #{record.drugdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update drug
+    set drugId = #{record.drugid,jdbcType=INTEGER},
+      drugCode = #{record.drugcode,jdbcType=VARCHAR},
+      drugImgName = #{record.drugimgname,jdbcType=VARCHAR},
+      drugInprice = #{record.druginprice,jdbcType=DOUBLE},
+      drugSaleprice = #{record.drugsaleprice,jdbcType=DOUBLE},
+      drugName = #{record.drugname,jdbcType=VARCHAR},
+      drugType = #{record.drugtype,jdbcType=VARCHAR},
+      drugSimpleDesc = #{record.drugsimpledesc,jdbcType=VARCHAR},
+      drugMakeDate = #{record.drugmakedate,jdbcType=DATE},
+      drugEXPDate = #{record.drugexpdate,jdbcType=DATE},
+      drugQualityTime = #{record.drugqualitytime,jdbcType=INTEGER},
+      drugDesc = #{record.drugdesc,jdbcType=VARCHAR},
+      drugMakeFirm = #{record.drugmakefirm,jdbcType=VARCHAR},
+      drugEatExplain = #{record.drugeatexplain,jdbcType=VARCHAR},
+      drugNum = #{record.drugnum,jdbcType=INTEGER},
+      drugLastNum = #{record.druglastnum,jdbcType=INTEGER},
+      drugState = #{record.drugstate,jdbcType=INTEGER},
+      drugRemark = #{record.drugremark,jdbcType=VARCHAR},
+      drugDel = #{record.drugdel,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ujiuye.fayao.bean.Drug" >
+    update drug
+    <set >
+      <if test="drugcode != null" >
+        drugCode = #{drugcode,jdbcType=VARCHAR},
+      </if>
+      <if test="drugimgname != null" >
+        drugImgName = #{drugimgname,jdbcType=VARCHAR},
+      </if>
+      <if test="druginprice != null" >
+        drugInprice = #{druginprice,jdbcType=DOUBLE},
+      </if>
+      <if test="drugsaleprice != null" >
+        drugSaleprice = #{drugsaleprice,jdbcType=DOUBLE},
+      </if>
+      <if test="drugname != null" >
+        drugName = #{drugname,jdbcType=VARCHAR},
+      </if>
+      <if test="drugtype != null" >
+        drugType = #{drugtype,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsimpledesc != null" >
+        drugSimpleDesc = #{drugsimpledesc,jdbcType=VARCHAR},
+      </if>
+      <if test="drugmakedate != null" >
+        drugMakeDate = #{drugmakedate,jdbcType=DATE},
+      </if>
+      <if test="drugexpdate != null" >
+        drugEXPDate = #{drugexpdate,jdbcType=DATE},
+      </if>
+      <if test="drugqualitytime != null" >
+        drugQualityTime = #{drugqualitytime,jdbcType=INTEGER},
+      </if>
+      <if test="drugdesc != null" >
+        drugDesc = #{drugdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="drugmakefirm != null" >
+        drugMakeFirm = #{drugmakefirm,jdbcType=VARCHAR},
+      </if>
+      <if test="drugeatexplain != null" >
+        drugEatExplain = #{drugeatexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="drugnum != null" >
+        drugNum = #{drugnum,jdbcType=INTEGER},
+      </if>
+      <if test="druglastnum != null" >
+        drugLastNum = #{druglastnum,jdbcType=INTEGER},
+      </if>
+      <if test="drugstate != null" >
+        drugState = #{drugstate,jdbcType=INTEGER},
+      </if>
+      <if test="drugremark != null" >
+        drugRemark = #{drugremark,jdbcType=VARCHAR},
+      </if>
+      <if test="drugdel != null" >
+        drugDel = #{drugdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where drugId = #{drugid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ujiuye.fayao.bean.Drug" >
+    update drug
+    set drugCode = #{drugcode,jdbcType=VARCHAR},
+      drugImgName = #{drugimgname,jdbcType=VARCHAR},
+      drugInprice = #{druginprice,jdbcType=DOUBLE},
+      drugSaleprice = #{drugsaleprice,jdbcType=DOUBLE},
+      drugName = #{drugname,jdbcType=VARCHAR},
+      drugType = #{drugtype,jdbcType=VARCHAR},
+      drugSimpleDesc = #{drugsimpledesc,jdbcType=VARCHAR},
+      drugMakeDate = #{drugmakedate,jdbcType=DATE},
+      drugEXPDate = #{drugexpdate,jdbcType=DATE},
+      drugQualityTime = #{drugqualitytime,jdbcType=INTEGER},
+      drugDesc = #{drugdesc,jdbcType=VARCHAR},
+      drugMakeFirm = #{drugmakefirm,jdbcType=VARCHAR},
+      drugEatExplain = #{drugeatexplain,jdbcType=VARCHAR},
+      drugNum = #{drugnum,jdbcType=INTEGER},
+      drugLastNum = #{druglastnum,jdbcType=INTEGER},
+      drugState = #{drugstate,jdbcType=INTEGER},
+      drugRemark = #{drugremark,jdbcType=VARCHAR},
+      drugDel = #{drugdel,jdbcType=INTEGER}
+    where drugId = #{drugid,jdbcType=INTEGER}
+  </update>
+</mapper>

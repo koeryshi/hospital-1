@@ -64,7 +64,7 @@
 		{id:'4',text:'药品管理',href:'html/medicine/index.jsp'},
 		
 		{id:'16',text:'检查收费项目登记',href:'html/hospital/charge2.html'},
-		{id:'6',text:'收费项目管理',href:'html/hospital/charge.html'},
+		{id:'6',text:'收费项目管理',href:'html/hospital/charge.jsp'},
 	
 		/** 扩展
 		{id:'9',text:'月营业额统计',href:''},
