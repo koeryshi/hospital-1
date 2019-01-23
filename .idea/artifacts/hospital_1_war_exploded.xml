@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="hospital:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/hospital_war_exploded</output-path>
+  <artifact type="exploded-war" name="hospital-1:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/hospital_1_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="hospital" />
+          <element id="module-output" name="hospital-1" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.0.0" />
@@ -47,7 +47,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.3.7.RELEASE" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="hospital/web/Web" />
+      <element id="javaee-facet-resources" facet="hospital-1/web/Web" />
     </root>
   </artifact>
 </component>
