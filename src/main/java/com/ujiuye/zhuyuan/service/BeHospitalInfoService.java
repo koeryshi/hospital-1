@@ -8,4 +8,7 @@ import java.util.List;
 public interface BeHospitalInfoService {
 
     public List<Behospitalinfo> selectBeHospitalInfo(BehospitalinfoExample behospitalinfoExample);
+
+
+
 }

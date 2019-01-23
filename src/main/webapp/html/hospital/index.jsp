@@ -35,7 +35,7 @@
     <script type="text/javascript">
 	 $(function () {
 		$('#newNav').click(function(){
-				window.location.href="add.html";
+				window.location.href="add.jsp";
 		 });
     });
 
@@ -119,14 +119,15 @@
          /* return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;*/
      };
      function submit() {
-         $(".old").remove();
-        /* var param=$("#form1").serializeObject();*/
+        /* $(".old").remove();*/
+        var param=$("#form1").serializeObject();
              $.ajax({
                  async: false,
-                 type: "post",
-                 dataType: "json",
-                 url: "${pageContext.request.contextPath}/zhuyuan/selectInfo" ,
-                 data: $('#form1').serialize(),
+                 type: 'post',
+                 dataType: 'json',
+                 contentType: false,
+                 url: '${pageContext.request.contextPath}/zhuyuan/selectInfo' ,
+                 data: param,
                  success: function (returndata) {
                      $(returndata).each(function (index,item) {
 

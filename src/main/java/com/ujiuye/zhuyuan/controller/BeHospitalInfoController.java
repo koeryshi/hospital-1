@@ -26,8 +26,8 @@ public class BeHospitalInfoController {
     @ResponseBody
     public List<Behospitalinfo> selectInfo(Behospitalinfo behospitalinfo){
 
-        System.out.println(behospitalinfo);
-        System.out.println(behospitalinfo.getDate1()+"----"+behospitalinfo.getDate2());
+        /*System.out.println(behospitalinfo);
+        System.out.println(behospitalinfo.getDate1()+"----"+behospitalinfo.getDate2());*/
         BehospitalinfoExample be=new BehospitalinfoExample();
         be.createCriteria();
 
